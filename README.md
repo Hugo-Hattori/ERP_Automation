@@ -37,5 +37,8 @@ https://github.com/Hugo-Hattori/ERP_Automation/blob/08e9b049addee61caf9fafa155e3
 <p>We will be using PyAutoGui's image recognition functionality to identify the Fill-In Fields
 present in Fakturama's interface and then fill in those fields with data imported from the database.</p>
 
-https://github.com/Hugo-Hattori/ERP_Automation/blob/08e9b049addee61caf9fafa155e3a854eb879af1/Automa%C3%A7%C3%A3o%20ERP.py#L67-L69
+<p>For an instance, the image below is the "supplier_code.png" file used to locate the respective Fill-In Field.</p>
+
 ![supplier_code](https://github.com/Hugo-Hattori/ERP_Automation/assets/136493140/b0398bc9-3f1a-453b-a431-846426dbdb69)
+
+https://github.com/Hugo-Hattori/ERP_Automation/blob/08e9b049addee61caf9fafa155e3a854eb879af1/Automa%C3%A7%C3%A3o%20ERP.py#L67-L69
