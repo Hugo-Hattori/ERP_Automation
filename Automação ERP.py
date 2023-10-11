@@ -5,10 +5,10 @@ import time
 import pandas as pd
 
 
-pyautogui.FAILSAFE = True #isto permite que caso que vc queira interromper o pyautogui, basta colocar o mouse em qualquer uma das 4 extremidades da tela
+pyautogui.FAILSAFE = True
 
 def localizar_imagem(imagem):
-    while not pyautogui.locateOnScreen(imagem, grayscale=True, confidence=0.9): #esses parâmetros permitem que o reconhecimento de imagem seja mais tolerante a imagens um pouco diferentes
+    while not pyautogui.locateOnScreen(imagem, grayscale=True, confidence=0.9):
         time.sleep(1)
     encontrou = pyautogui.locateOnScreen(imagem, grayscale=True, confidence=0.9)
     return encontrou
@@ -16,19 +16,19 @@ def localizar_imagem(imagem):
 def direita(posicoes_imagem):
     return posicoes_imagem[0] + posicoes_imagem[2], posicoes_imagem[1] + posicoes_imagem[3]/2
 
-def escrever_texto(texto): #resolvendo escrita de acentos e caracteres especiais do pyautogui
+def escrever_texto(texto):
     pyperclip.copy(texto)
     pyautogui.hotkey('ctrl', 'v')
 
 #Abrir o ERP (Fakturama)
-subprocess.Popen([r'C:\Program Files\Fakturama2\Fakturama.exe']) #abrindo um executável
+subprocess.Popen([r'C:\Program Files\Fakturama2\Fakturama.exe'])
 encontrou = localizar_imagem(r'ERP_Images\fakturama_logo.png')
 
 
 #Importando a base de dados de produtos
 df_produtos = pd.read_excel('Produtos.xlsx')
 
-for linha in df_produtos.index: #para cada número da linha da tabela
+for linha in df_produtos.index:
     nome = df_produtos.loc[linha, 'Nome']
     id = df_produtos.loc[linha, 'ID']
     categoria = df_produtos.loc[linha, 'Categoria']
@@ -42,7 +42,7 @@ for linha in df_produtos.index: #para cada número da linha da tabela
 
     #Clicar no menu New
     encontrou = localizar_imagem(r'ERP_Images\menu_new.png')
-    pyautogui.click(pyautogui.center(encontrou)) #clica no centro a imagem encontrada
+    pyautogui.click(pyautogui.center(encontrou))
 
     #Clicar em New Product
     encontrou = localizar_imagem(r'ERP_Images\new_product.png')
@@ -53,7 +53,7 @@ for linha in df_produtos.index: #para cada número da linha da tabela
     pyautogui.click(direita(encontrou))
     escrever_texto(str(id))
 
-    pyautogui.press('tab') #1 tecla só, hotkey é para combinação de teclas
+    pyautogui.press('tab')
     escrever_texto(str(nome))
 
     encontrou = localizar_imagem(r'ERP_Images\category.png')
@@ -74,7 +74,7 @@ for linha in df_produtos.index: #para cada número da linha da tabela
 
     encontrou = localizar_imagem(r'ERP_Images\price.png')
     pyautogui.click(direita(encontrou))
-    preco_texto = f'{preco:.2f}'.replace('.',',') #formatando para duas casas decimais e depois trocando ponto por vírgula
+    preco_texto = f'{preco:.2f}'.replace('.',',')
     escrever_texto(str(preco_texto))
 
     encontrou = localizar_imagem(r'ERP_Images\cost.png')
